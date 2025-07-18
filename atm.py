@@ -5,6 +5,8 @@
 #입금, 출금, 종료, 입출금 내역 영수증
 
 blance = 600000
+# 사용하기 위해 미리 만드는것, 초기화 특정값을 넣어서 만들거나, 빈 값을 넣어서 만듭니다.
+receipts = []
 
 while True:
     num = input("사용하실 번호를 선택해주세요 (1.입금, 2.출금, 3.영수증 보기, 4.종료) : ")
@@ -15,17 +17,22 @@ while True:
         deposit_amount = int(input('입금할 금액을 입력해주세요: ')) # str:5000 -> int() -> int:5000
         blance += deposit_amount
         print(f'입금하신 금액{deposit_amount}원이고, 현재 잔액은 {blance}원 입니다.')
+        receipts.append(('입금,', deposit_amount, blance))
 
     if num == "2":
-        without_amount = int(input('출금할 금액을 입력해주세요: ')) # str:5000 -> int() -> int:5000
-        without_amount = min(blance,without_amount) #min(10000, 30000)
-        blance -= without_amount
-        print(f'출금하신 금액{without_amount}원이고, 현재 잔액은 {blance}원 입니다.') #balnce
+        withdraw_amount = int(input('출금할 금액을 입력해주세요: ')) # str:5000 -> int() -> int:5000
+        withdraw_amount = min(blance,withdraw_amount) #min(변수명, )
+        blance -= withdraw_amount
+        print(f'출금하신 금액{withdraw_amount}원이고, 현재 잔액은 {blance}원 입니다.') #balnce
+        receipts.append(('출금,', withdraw_amount, blance))
 
 
     if num == "3":
-        pass
-
+        if receipts:
+            for i in receipts:
+                print(f"{i[0]}: {i[1]}원 | 잔액: {i[2]}")
+            else:
+                print("영수증 내역이 없습니다. ")
 
 
 print(f'서비스를 종료합니다. 현재 잔액은 {blance}입니다.')
