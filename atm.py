@@ -8,7 +8,6 @@ blance = 600000
 
 while True:
     num = input("사용하실 번호를 선택해주세요 (1.입금, 2.출금, 3.영수증 보기, 4.종료) : ")
-
     if num == '4': # 4번 종료 기능
         break
 
@@ -16,13 +15,17 @@ while True:
         deposit_amount = int(input('입금할 금액을 입력해주세요: ')) # str:5000 -> int() -> int:5000
         blance += deposit_amount
         print(f'입금하신 금액{deposit_amount}원이고, 현재 잔액은 {blance}원 입니다.')
-        pass
 
     if num == "2":
-        pass
+        without_amount = int(input('출금할 금액을 입력해주세요: ')) # str:5000 -> int() -> int:5000
+        without_amount = min(blance,without_amount) #min(10000, 30000)
+        blance -= without_amount
+        print(f'출금하신 금액{without_amount}원이고, 현재 잔액은 {blance}원 입니다.') #balnce
+
 
     if num == "3":
         pass
+
 
 
 print(f'서비스를 종료합니다. 현재 잔액은 {blance}입니다.')
